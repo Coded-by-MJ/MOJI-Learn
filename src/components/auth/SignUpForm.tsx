@@ -20,18 +20,14 @@ import { authClient } from "@/lib/auth-client";
 import { LogoImage } from "../global/Logo";
 import EmailVerificationSent from "./EmailVerificationSent";
 import { getDefaultImage } from "@/utils/funcs";
+import { env } from "@/data/env/client";
 
 function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showVerifyEmail, setShowVerifyEmail] = useState(false);
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    setError,
-  } = useForm<SignUpSchemaType>({
+  const { control, handleSubmit, setError } = useForm<SignUpSchemaType>({
     resolver: zodResolver(signUpSchema),
     mode: "onChange",
     defaultValues: {
@@ -49,7 +45,7 @@ function SignUpForm() {
         name: `${values.firstName} ${values.lastName}`,
         password: values.password,
         image: getDefaultImage(`${values.firstName} ${values.lastName}`),
-        callbackURL: `${process.env.NEXT_PUBLIC_APP_URL}/onboarding`,
+        callbackURL: `${env.NEXT_PUBLIC_APP_URL}/`,
       },
       {
         onRequest: () => {

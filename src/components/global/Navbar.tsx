@@ -1,8 +1,8 @@
 import { Button } from "../ui/button";
 import { AdminAccess, SignedIn, SignedOut } from "../auth/AuthStatusComponent";
-import { Link } from "lucide-react";
 import { Suspense } from "react";
 import UserIcon from "./UserIcon";
+import Link from "next/link";
 
 function Navbar() {
   return (

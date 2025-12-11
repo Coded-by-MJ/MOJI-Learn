@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { auth } from "@/lib/auth"; // your better-auth instance
 import { headers } from "next/headers";
-import { UserRole } from "@/generated/prisma";
+import { userRoleEnum } from "@/drizzle/schema/auth";
 // import { routeAccessMap } from "./utils";
 
 const privateRoutes = ["/list", "/profile", "/settings"];
@@ -30,9 +30,9 @@ export async function proxy(request: NextRequest) {
   const isAuth = authRoutes.some((route) => pathname.startsWith(route));
 
   // Not logged in → block private routes
-  if (!session && isPrivate) {
-    return NextResponse.redirect(new URL("/sign-in", request.url));
-  }
+  // if (!session && isPrivate) {
+  //   return NextResponse.redirect(new URL("/sign-in", request.url));
+  // }
 
   // Prevent cross-role access
 

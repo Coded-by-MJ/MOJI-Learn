@@ -1,6 +1,6 @@
-import { env } from "@/data/env/server"
-import { drizzle } from "drizzle-orm/node-postgres"
-import * as schema from "./schema"
+import { env } from "@/data/env/server";
+import { drizzle } from "drizzle-orm/node-postgres";
+import * as schema from "./schema";
 
 export const db = drizzle({
   schema,
@@ -10,4 +10,4 @@ export const db = drizzle({
     database: env.DB_NAME,
     host: env.DB_HOST,
   },
-})
+});

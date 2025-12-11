@@ -1,5 +1,5 @@
 {
-  "id": "dd16e0e8-039d-4d96-822f-0cc08efd3e25",
+  "id": "66f33e37-0efb-41e1-b33a-875e427cb75b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -28,7 +28,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -175,7 +175,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -238,10 +238,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "name": {
           "name": "name",
@@ -770,7 +769,7 @@
         },
         "userId": {
           "name": "userId",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -862,7 +861,7 @@
       "columns": {
         "userId": {
           "name": "userId",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -930,8 +929,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.user_lesson_completes": {
-      "name": "user_lesson_completes",
+    "public.user_lesson_complete": {
+      "name": "user_lesson_complete",
       "schema": "",
       "columns": {
         "lessonId": {
@@ -942,7 +941,7 @@
         },
         "userId": {
           "name": "userId",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -963,9 +962,9 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "user_lesson_completes_lessonId_lessons_id_fk": {
-          "name": "user_lesson_completes_lessonId_lessons_id_fk",
-          "tableFrom": "user_lesson_completes",
+        "user_lesson_complete_lessonId_lessons_id_fk": {
+          "name": "user_lesson_complete_lessonId_lessons_id_fk",
+          "tableFrom": "user_lesson_complete",
           "tableTo": "lessons",
           "columnsFrom": [
             "lessonId"
@@ -976,9 +975,9 @@
           "onDelete": "restrict",
           "onUpdate": "no action"
         },
-        "user_lesson_completes_userId_users_id_fk": {
-          "name": "user_lesson_completes_userId_users_id_fk",
-          "tableFrom": "user_lesson_completes",
+        "user_lesson_complete_userId_users_id_fk": {
+          "name": "user_lesson_complete_userId_users_id_fk",
+          "tableFrom": "user_lesson_complete",
           "tableTo": "users",
           "columnsFrom": [
             "userId"
@@ -991,8 +990,8 @@
         }
       },
       "compositePrimaryKeys": {
-        "user_lesson_completes_lessonId_userId_pk": {
-          "name": "user_lesson_completes_lessonId_userId_pk",
+        "user_lesson_complete_lessonId_userId_pk": {
+          "name": "user_lesson_complete_lessonId_userId_pk",
           "columns": [
             "lessonId",
             "userId"
