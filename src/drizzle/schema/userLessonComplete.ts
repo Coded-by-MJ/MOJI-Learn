@@ -2,8 +2,7 @@ import { pgTable } from "drizzle-orm/pg-core";
 import { createdAt, updatedAt } from "../schemaHelpers";
 import { LessonTable } from "./lesson";
 import { UserTable } from "./auth";
-import { uuid } from "drizzle-orm/pg-core";
-import { primaryKey } from "drizzle-orm/pg-core";
+import { uuid ,text, primaryKey} from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 export const UserLessonCompleteTable = pgTable(
@@ -12,7 +11,7 @@ export const UserLessonCompleteTable = pgTable(
     lessonId: uuid()
       .notNull()
       .references(() => LessonTable.id, { onDelete: "restrict" }),
-    userId: uuid()
+    userId: text()
       .notNull()
       .references(() => UserTable.id, { onDelete: "restrict" }),
     createdAt,

@@ -1,7 +1,12 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/drizzle/db";
-import * as schema from "@/drizzle/schema";
+import {
+  UserTable,
+  SessionTable,
+  AccountTable,
+  VerificationTable,
+} from "@/drizzle/schema";
 import { admin, openAPI } from "better-auth/plugins";
 import { nextCookies } from "better-auth/next-js";
 import { sendResetPasswordEmailAction } from "@/lib/resendActions";
@@ -10,7 +15,12 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
     usePlural: true,
-    schema,
+    schema: {
+      users: UserTable,
+      sessions: SessionTable,
+      accounts: AccountTable,
+      verifications: VerificationTable,
+    },
   }),
   appName: "MOJI Learn",
   emailAndPassword: {
@@ -20,7 +30,7 @@ export const auth = betterAuth({
       await sendResetPasswordEmailAction({
         email: user.email,
         link: url,
-        firstName: user.name.split(" ")[0],
+        firstName: user.name.split(" ")[0] ?? user.name,
       });
     },
   },
@@ -32,6 +42,13 @@ export const auth = betterAuth({
         input: false,
         required: false,
         defaultValue: "user",
+        returned: true,
+      },
+      deletedAt: {
+        type: "string",
+        input: false,
+        required: false,
+        defaultValue: null,
         returned: true,
       },
     },

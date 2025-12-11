@@ -7,7 +7,6 @@ import {
   jsonb,
 } from "drizzle-orm/pg-core";
 import { UserTable } from "./auth";
-import { CourseTable } from "./course";
 import { id, createdAt, updatedAt } from "../schemaHelpers";
 import { ProductTable } from "./product";
 import { relations } from "drizzle-orm";
@@ -15,7 +14,7 @@ import { relations } from "drizzle-orm";
 export const PurchaseTable = pgTable("purchases", {
   id,
   pricePaidInCents: integer().notNull(),
-  userId: uuid()
+  userId: text()
     .notNull()
     .references(() => UserTable.id, { onDelete: "restrict" }),
   productId: uuid()

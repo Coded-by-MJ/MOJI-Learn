@@ -6,7 +6,6 @@ import {
   boolean,
   index,
   pgEnum,
-  uuid,
 } from "drizzle-orm/pg-core";
 import { UserCourseAccessTable } from "./userCourseAccess";
 
@@ -15,7 +14,7 @@ export type UserRole = (typeof userRoles)[number];
 export const userRoleEnum = pgEnum("user_role", userRoles);
 
 export const UserTable = pgTable("users", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
@@ -25,7 +24,6 @@ export const UserTable = pgTable("users", {
     .defaultNow()
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
-
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   banned: boolean("banned").default(false).notNull(),
   banReason: text("ban_reason"),
@@ -45,7 +43,7 @@ export const SessionTable = pgTable(
       .notNull(),
     ipAddress: text("ip_address"),
     userAgent: text("user_agent"),
-    userId: uuid("user_id")
+    userId: text("user_id")
       .notNull()
       .references(() => UserTable.id, { onDelete: "cascade" }),
     impersonatedBy: text("impersonated_by"),
@@ -59,7 +57,7 @@ export const AccountTable = pgTable(
     id: text("id").primaryKey(),
     accountId: text("account_id").notNull(),
     providerId: text("provider_id").notNull(),
-    userId: uuid("user_id")
+    userId: text("user_id")
       .notNull()
       .references(() => UserTable.id, { onDelete: "cascade" }),
     accessToken: text("access_token"),
