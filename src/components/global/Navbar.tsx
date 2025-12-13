@@ -1,10 +1,15 @@
 import { Button } from "../ui/button";
-import { AdminAccess, SignedIn, SignedOut } from "../auth/AuthStatusComponent";
+import {
+  AdminAccess,
+  SignedIn,
+  SignedOut,
+} from "../../features/auth/components/AuthStatusComponent";
 import { Suspense } from "react";
 import UserIcon from "./UserIcon";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
-function Navbar() {
+export function UserNavbar() {
   return (
     <header className="flex h-12 shadow bg-background z-10">
       <nav className="flex gap-4 container mx-auto px-4">
@@ -17,21 +22,26 @@ function Navbar() {
         <Suspense>
           <SignedIn>
             <AdminAccess>
-              <Link href="/admin">Admin</Link>
+              <Link
+                className="hover:bg-accent/50 flex items-center px-2"
+                href="/admin"
+              >
+                Admin
+              </Link>
             </AdminAccess>
             <Link
-              className="hover:bg-accent/10 flex items-center px-2"
+              className="hover:bg-accent/50 flex items-center px-2"
               href="/courses"
             >
               My Courses
             </Link>
             <Link
-              className="hover:bg-accent/10 flex items-center px-2"
+              className="hover:bg-accent/50 flex items-center px-2"
               href="/purchases"
             >
               Purchase History
             </Link>
-            <UserIcon isLink={true} className="self-center" />
+            <UserIcon isLink={true} className="self-center shrink-0" />
           </SignedIn>
         </Suspense>
         <Suspense>
@@ -45,4 +55,37 @@ function Navbar() {
     </header>
   );
 }
-export default Navbar;
+
+export function AdminNavbar() {
+  return (
+    <header className="flex h-12 shadow bg-background z-10">
+      <nav className="flex gap-4 container mx-auto px-4">
+        <div className="mr-auto flex items-center gap-2">
+          <Link className="text-lg hover:underline" href="/admin">
+            MOJI Learn
+          </Link>
+          <Badge>Admin</Badge>
+        </div>
+        <Link
+          className="hover:bg-accent/50 flex items-center px-2"
+          href="/admin/courses"
+        >
+          Courses
+        </Link>
+        <Link
+          className="hover:bg-accent/50 flex items-center px-2"
+          href="/admin/products"
+        >
+          Products
+        </Link>
+        <Link
+          className="hover:bg-accent/50 flex items-center px-2"
+          href="/admin/sales"
+        >
+          Sales
+        </Link>
+        <UserIcon isLink={true} className="self-center shrink-0" />
+      </nav>
+    </header>
+  );
+}

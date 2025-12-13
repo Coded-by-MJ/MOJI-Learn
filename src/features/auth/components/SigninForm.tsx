@@ -15,10 +15,10 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { ArrowRight, Eye, EyeOff, Loader2 } from "lucide-react";
-import { signInSchema, SignInSchemaType } from "@/types/zod-schemas";
-import { Input } from "../ui/input";
+import { signInSchema, SignInSchemaType } from "../zod-schemas";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
-import { LogoImage } from "../global/Logo";
+import { LogoImage } from "@/components/global/Logo";
 import EmailVerificationSent from "./EmailVerificationSent";
 
 function SignInForm() {
@@ -48,15 +48,8 @@ function SignInForm() {
           setIsLoading(true);
         },
         onSuccess: async (ctx) => {
-          if (ctx.data.user.isPasswordResetRequired) {
-            push("/forgot-password");
-            toast.error("Please Reset Your Password First.");
-          } else {
-            toast.success("Successfully signed in.");
-            push(`/${ctx.data.user.role}`);
-          }
-
-          setIsLoading(false);
+          toast.success("Successfully signed in.");
+          push(`/`);
         },
         onError: (ctx) => {
           setIsLoading(false);

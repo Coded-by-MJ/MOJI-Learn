@@ -54,7 +54,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <NextTopLoader color="oklch(0.9645 0.0261 90.0969)" showSpinner={false} />
       {children}
-      <Toaster position="top-right" richColors />
+      <Toaster position="bottom-right" richColors />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

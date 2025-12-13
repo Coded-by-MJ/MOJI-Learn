@@ -14,12 +14,12 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { ArrowRight, Eye, EyeOff, Loader2 } from "lucide-react";
-import { signUpSchema, SignUpSchemaType } from "@/types/zod-schemas";
-import { Input } from "../ui/input";
+import { signUpSchema, SignUpSchemaType } from "../zod-schemas";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
-import { LogoImage } from "../global/Logo";
+import { LogoImage } from "@/components/global/Logo";
 import EmailVerificationSent from "./EmailVerificationSent";
-import { getDefaultImage } from "@/utils/funcs";
+import { getDefaultImage } from "@/utils/helperFuncs";
 import { env } from "@/data/env/client";
 
 function SignUpForm() {

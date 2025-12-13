@@ -45,6 +45,7 @@ const nextConfig: NextConfig = {
     removeConsole:
       process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
+  cacheComponents: true,
 };
 
 export default nextConfig;

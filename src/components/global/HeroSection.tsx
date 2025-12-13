@@ -1,9 +1,13 @@
-import { SignedIn, SignedOut } from "@/components/auth/AuthStatusComponent";
+import {
+  SignedIn,
+  SignedOut,
+} from "@/features/auth/components/AuthStatusComponent";
 import { LogoImage } from "./Logo";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Route } from "next";
 import { UserSession } from "@/lib/auth-client";
+import { Suspense } from "react";
 
 function HeroSection() {
   return (
@@ -14,26 +18,30 @@ function HeroSection() {
           MOJI Learn - Online Course Platform
         </h1>
 
-        <SignedOut>
-          <Button
-            asChild
-            className="font-medium font-dm text-base bg-secondary text-primary h-11 rounded-4xl px-6 w-max  hover:border-primary border border-transparent transition-colors hover:bg-secondary hover:text-primary group"
-          >
-            <Link href={"/sign-in"}>
-              <span>Get Started</span>
-            </Link>
-          </Button>
-        </SignedOut>
-        <SignedIn>
-          <Button
-            asChild
-            className="font-medium font-dm text-base bg-secondary text-primary h-11 rounded-4xl px-6 w-max  hover:border-primary border border-transparent transition-colors hover:bg-secondary hover:text-primary group"
-          >
-            <Link href={"/sign-in"}>
-              <span>Get Started</span>
-            </Link>
-          </Button>
-        </SignedIn>
+        <Suspense fallback={null}>
+          <SignedOut>
+            <Button
+              asChild
+              className="font-medium font-dm text-base bg-secondary text-primary h-11 rounded-4xl px-6 w-max  hover:border-primary border border-transparent transition-colors hover:bg-secondary hover:text-primary group"
+            >
+              <Link href={"/sign-in"}>
+                <span>Get Started</span>
+              </Link>
+            </Button>
+          </SignedOut>
+        </Suspense>
+        <Suspense fallback={null}>
+          <SignedIn>
+            <Button
+              asChild
+              className="font-medium font-dm text-base bg-secondary text-primary h-11 rounded-4xl px-6 w-max  hover:border-primary border border-transparent transition-colors hover:bg-secondary hover:text-primary group"
+            >
+              <Link href={"/sign-in"}>
+                <span>Get Started</span>
+              </Link>
+            </Button>
+          </SignedIn>
+        </Suspense>
       </div>
     </section>
   );

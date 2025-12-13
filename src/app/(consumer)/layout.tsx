@@ -1,10 +1,12 @@
-import Navbar from "@/components/global/Navbar";
+import { UserNavbar } from "@/components/global/Navbar";
 
-export default function ConsumerLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function ConsumerLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-    <Navbar />
+      <UserNavbar />
       {children}
     </>
-  )
+  );
 }

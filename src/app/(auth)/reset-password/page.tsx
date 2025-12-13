@@ -1,31 +1,31 @@
-import ExpiredLink from "@/components/auth/ExpiredLink";
-import ResetPasswordForm from "@/components/auth/ResetPasswordForm";
+import ExpiredLink from "@/features/auth/components/ExpiredLink";
+import ResetPasswordForm from "@/features/auth/components/ResetPasswordForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Reset Password | Otega Clothing Production Company",
+  title: "Reset Password | MOJI Learn",
   description: "Reset your password to access your account.",
   alternates: {
     canonical: "/reset-password",
   },
   openGraph: {
-    title: "Reset Password | Otega Clothing Production Company",
+    title: "Reset Password | MOJI Learn",
     description: "Reset your password to access your account.",
     url: "https://moji-school.miracleibharokhonre.com/reset-password",
-    siteName: "Otega Clothing Production Company",
+    siteName: "MOJI Learn",
     type: "website",
     images: [
       {
         url: "https://www.miracleibharokhonre.com/images/mylogo.png",
         width: 1200,
         height: 630,
-        alt: "Otega Clothing Production Company - Reset Password",
+        alt: "MOJI Learn - Reset Password",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reset Password | Otega Clothing Production Company",
+    title: "Reset Password | MOJI Learn",
     description: "Reset your password to access your account.",
     images: ["https://www.miracleibharokhonre.com/images/mylogo.png"],
   },

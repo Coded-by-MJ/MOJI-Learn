@@ -1,5 +1,5 @@
 import { CheckCircle2 } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../../../components/ui/button";
 
 function PasswordResetLinkSent({
   setShowPasswordResetLinkSent,
@@ -23,7 +23,7 @@ function PasswordResetLinkSent({
       <div className="text-center text-xs text-light-grey">
         Didn’t receive the email? Be sure to check your spam or junk folder.
         <br />
-        <div className="justify-center items-center gap-4 fle">
+        <div className="justify-center items-center gap-4 flex">
           <Button
             type="button"
             variant={"link"}

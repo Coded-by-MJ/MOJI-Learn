@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
-
 import { useRouter } from "nextjs-toploader/app";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
+import { Controller } from "react-hook-form";
 import {
   Field,
   FieldContent,
@@ -20,7 +18,7 @@ import { ArrowRight, Eye, EyeOff, Loader2 } from "lucide-react";
 import {
   resetPasswordSchema,
   ResetPasswordSchemaType,
-} from "@/types/zod-schemas";
+} from "../zod-schemas";
 import { authClient } from "@/lib/auth-client";
 import ExpiredLink from "./ExpiredLink";
 
@@ -84,12 +82,11 @@ function ResetPasswordForm({ token }: { token: string }) {
         </p>
       </div>
 
-      <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex w-full  justify-center  flex-col gap-4"
         >
-          <FormField
+          <Controller
             control={form.control}
             name="newPassword"
             render={({ field, fieldState }) => (
@@ -124,7 +121,7 @@ function ResetPasswordForm({ token }: { token: string }) {
               </Field>
             )}
           />
-          <FormField
+          <Controller
             control={form.control}
             name="confirmPassword"
             render={({ field, fieldState }) => (
@@ -177,7 +174,6 @@ function ResetPasswordForm({ token }: { token: string }) {
             )}
           </Button>
         </form>
-      </Form>
     </div>
   );
 }

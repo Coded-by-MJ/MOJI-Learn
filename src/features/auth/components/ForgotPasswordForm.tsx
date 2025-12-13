@@ -1,28 +1,22 @@
 "use client";
 
-import Link from "next/link";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
-import {
-  Field,
-  FieldContent,
-  FieldError,
-  FieldLabel,
-} from "@/components/ui/field";
+import { Field, FieldContent, FieldError, FieldLabel } from "@/components/ui/field";
+import { Controller } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "sonner";
 import { ArrowRight, Loader2 } from "lucide-react";
 import {
   forgotPasswordSchema,
   ForgotPasswordSchemaType,
-} from "@/types/zod-schemas";
-import { Input } from "../ui/input";
+} from "../zod-schemas";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import PasswordResetLinkSent from "./PasswordResetLinkSent";
-import { LogoImage } from "../global/Logo";
+import { LogoImage } from "@/components/global/Logo";
 
 function ForgotPasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -82,12 +76,11 @@ function ForgotPasswordForm() {
         </p>
       </div>
 
-      <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex w-full  justify-center  flex-col gap-4"
         >
-          <FormField
+          <Controller
             control={form.control}
             name="email"
             render={({ field, fieldState }) => (
@@ -124,7 +117,6 @@ function ForgotPasswordForm() {
             )}
           </Button>
         </form>
-      </Form>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { db } from "@/drizzle/db";
 import { UserTable } from "@/drizzle/schema/auth";
 import { eq } from "drizzle-orm";
+import { revalidateUserCache } from "./cache";
 
 export async function insertUser(data: typeof UserTable.$inferInsert) {
   const [newUser] = await db
@@ -14,6 +15,7 @@ export async function insertUser(data: typeof UserTable.$inferInsert) {
   if (!newUser) {
     throw new Error("Failed to create user. Please try again later.");
   }
+  revalidateUserCache(newUser.id);
   return newUser;
 }
 
@@ -32,6 +34,7 @@ export async function updateUser({
   if (!updatedUser) {
     throw new Error("Failed to update user.");
   }
+  revalidateUserCache(userId);
   return updatedUser;
 }
 
@@ -49,5 +52,6 @@ export async function deleteUser(userId: string) {
   if (!deletedUser) {
     throw new Error("Failed to delete user.");
   }
+  revalidateUserCache(userId);
   return deletedUser;
 }
