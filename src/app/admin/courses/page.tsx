@@ -1,23 +1,23 @@
-import { Button } from "@/components/ui/button"
-import { PageHeader } from "@/components/global/PageHeader"
-import Link from "next/link"
-import { CourseTable } from "@/features/courses/components/CourseTable"
-import { cacheTag } from "next/cache"
-import { getCourseGlobalTag } from "@/features/courses/db/cache"
-import { db } from "@/drizzle/db"
+import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/global/PageHeader";
+import Link from "next/link";
+import { CourseTable } from "@/features/courses/components/CourseTable";
+import { cacheTag } from "next/cache";
+import { getCourseGlobalTag } from "@/features/courses/db/cache";
+import { db } from "@/drizzle/db";
 import {
   CourseSectionTable,
   CourseTable as DbCourseTable,
   LessonTable,
   UserCourseAccessTable,
-} from "@/drizzle/schema"
-import { asc, countDistinct, eq } from "drizzle-orm"
-// import { getUserCourseAccessGlobalTag } from "@/features/courses/db/cache"
-// import { getCourseSectionGlobalTag } from "@/features/courseSections/db/cache"
-// import { getLessonGlobalTag } from "@/features/lessons/db/cache"
+} from "@/drizzle/schema";
+import { asc, countDistinct, eq } from "drizzle-orm";
+import { getUserCourseAccessGlobalTag } from "@/features/courses/db/cache/userCourseAccess";
+import { getCourseSectionGlobalTag } from "@/features/courseSections/db/cache";
+import { getLessonGlobalTag } from "@/features/lessons/db/cache";
 
 export default async function CoursesPage() {
-  const courses = await getCourses()
+  const courses = await getCourses();
 
   return (
     <div className="container my-6">
@@ -29,17 +29,17 @@ export default async function CoursesPage() {
 
       <CourseTable courses={courses} />
     </div>
-  )
+  );
 }
 
 async function getCourses() {
-  "use cache"
+  "use cache";
   cacheTag(
     getCourseGlobalTag(),
-    // getUserCourseAccessGlobalTag(),
-    // getCourseSectionGlobalTag(),
-    // getLessonGlobalTag()
-  )
+    getUserCourseAccessGlobalTag(),
+    getCourseSectionGlobalTag(),
+    getLessonGlobalTag()
+  );
 
   return db
     .select({
@@ -60,5 +60,5 @@ async function getCourses() {
       eq(UserCourseAccessTable.courseId, DbCourseTable.id)
     )
     .orderBy(asc(DbCourseTable.name))
-    .groupBy(DbCourseTable.id)
+    .groupBy(DbCourseTable.id);
 }

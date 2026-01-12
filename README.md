@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MOJI Learn
 
-## Getting Started
+MOJI Learn is a modern Learning Management System (LMS) designed for selling digital products and courses with a seamless purchase, refund, and access flow. Built for scale and performance, MOJI Learn combines secure authentication, flexible payments, and smart regional pricing to deliver a smooth learning and commerce experience for creators and learners.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🎓 Course & Digital Product Management
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create, manage, and sell courses or standalone digital products. Control pricing, access rules, and content visibility with ease.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 💳 Secure Payments & Refunds
 
-## Learn More
+Integrated with **Stripe** to handle one-time payments, refunds, and purchase verification securely and reliably.
 
-To learn more about Next.js, take a look at the following resources:
+### 🔁 Refund Handling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Supports course and product refunds with proper access revocation and Stripe refund synchronization.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🔐 Authentication & Authorization
 
-## Deploy on Vercel
+Powered by **Better Auth**, providing secure login, session management, and scalable authentication flows.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🌍 Country-Based Coupons & Pricing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Uses **Arcjet** to apply country-aware coupon logic, enabling region-specific discounts and promotions.
+
+### ⚡ High-Performance Architecture
+
+Built with **Next.js cache** and **Server Actions** for fast page loads, reduced client-side complexity, and optimized data mutations.
+
+### 📦 Purchase & Access Control
+
+Only users who have purchased a course or product can access protected content, ensuring secure delivery of paid resources.
+
+### 🧾 Order & Transaction Tracking
+
+Track purchases, refunds, and payment status with a clear, auditable transaction flow.
+
+### 💻 Modern & Responsive UI
+
+Clean, intuitive interface optimized for both desktop and mobile learning experiences.
+
+---
+
+## 🧱 Built With
+
+- **Next.js (App Router)**
+- **TypeScript**
+- **Next.js Cache & Server Actions**
+- **Stripe**
+- **Better Auth**
+- **Arcjet**
+- **Tailwind CSS**
+- **Drizzle ORM**
+- **Postgres SQL**
+- **Zod**
+
+---
+
+## 🌐 Live Link
+
+[**MOJI Learn**](https://moji-learn.miracleibharokhonre.com/)
+
+---
+
+## 👤 Author
+
+**Miracle Ibharokhonre**
+
+- Twitter – [@MiracleJustice_](https://twitter.com/miraclejustice_)
+- Website – [miracleibharokhonre.com](https://miracleibharokhonre.com)

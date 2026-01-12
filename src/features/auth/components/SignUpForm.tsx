@@ -22,7 +22,7 @@ import EmailVerificationSent from "./EmailVerificationSent";
 import { getDefaultImage } from "@/utils/helperFuncs";
 import { env } from "@/data/env/client";
 
-function SignUpForm() {
+function SignUpForm({ forceRedirectUrl }: { forceRedirectUrl?: string }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showVerifyEmail, setShowVerifyEmail] = useState(false);
@@ -45,7 +45,7 @@ function SignUpForm() {
         name: `${values.firstName} ${values.lastName}`,
         password: values.password,
         image: getDefaultImage(`${values.firstName} ${values.lastName}`),
-        callbackURL: `${env.NEXT_PUBLIC_APP_URL}/`,
+        callbackURL: forceRedirectUrl ?? `${env.NEXT_PUBLIC_APP_URL}/`,
       },
       {
         onRequest: () => {

@@ -1,61 +1,23 @@
 "use client";
 
-// import { renderAxiosOrAuthError } from "@/lib/axios-client";
-import {
-  isServer,
-  QueryClient,
-  QueryClientProvider,
-  QueryCache,
-  MutationCache,
-} from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { toast } from "sonner";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 
-const globalErrorHandler = (error: unknown) => {
-  // if (typeof window !== "undefined") {
-  //   const msg = renderAxiosOrAuthError(error);
-  //   toast.error(msg);
-  // }
-};
-function makeQueryClient() {
-  return new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000,
-        retry: 1,
-      },
-    },
-    queryCache: new QueryCache({
-      onError: globalErrorHandler,
-    }),
-    mutationCache: new MutationCache({
-      onError: globalErrorHandler,
-    }),
-  });
-}
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-let browserQueryClient: QueryClient | undefined = undefined;
-
-function getQueryClient() {
-  if (isServer) {
-    return makeQueryClient();
-  } else {
-    if (!browserQueryClient) browserQueryClient = makeQueryClient();
-    return browserQueryClient;
-  }
+export function ThemeProvider({
+  children,
+  ...props
+}: React.ComponentProps<typeof NextThemesProvider>) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const queryClient = getQueryClient();
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
       <NextTopLoader color="oklch(0.9645 0.0261 90.0969)" showSpinner={false} />
       {children}
       <Toaster position="bottom-right" richColors />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    </ThemeProvider>
   );
 }

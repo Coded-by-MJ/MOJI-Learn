@@ -20,8 +20,9 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { LogoImage } from "@/components/global/Logo";
 import EmailVerificationSent from "./EmailVerificationSent";
+import { env } from "@/data/env/client";
 
-function SignInForm() {
+function SignInForm({ forceRedirectUrl }: { forceRedirectUrl?: string }) {
   const { push } = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -42,14 +43,14 @@ function SignInForm() {
       {
         email: values.email,
         password: values.password,
+        callbackURL: forceRedirectUrl ?? `${env.NEXT_PUBLIC_APP_URL}/`,
       },
       {
         onRequest: () => {
           setIsLoading(true);
         },
-        onSuccess: async (ctx) => {
+        onSuccess: async () => {
           toast.success("Successfully signed in.");
-          push(`/`);
         },
         onError: (ctx) => {
           setIsLoading(false);

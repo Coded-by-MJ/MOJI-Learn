@@ -41,7 +41,7 @@ export function UserNavbar() {
             >
               Purchase History
             </Link>
-            <UserIcon isLink={true} className="self-center shrink-0" />
+            <UserIcon className="self-center shrink-0" />
           </SignedIn>
         </Suspense>
         <Suspense>
@@ -84,7 +84,7 @@ export function AdminNavbar() {
         >
           Sales
         </Link>
-        <UserIcon isLink={true} className="self-center shrink-0" />
+        <UserIcon className="self-center shrink-0" />
       </nav>
     </header>
   );

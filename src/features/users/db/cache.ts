@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { getGlobalTag, getIdTag } from "@/lib/dataCache";
 
 export function getUsersGlobalTag() {
@@ -10,6 +10,6 @@ export function getUserIdTag(userId: string) {
 }
 
 export function revalidateUserCache(userId: string) {
-  revalidateTag(getUsersGlobalTag(), "max");
-  revalidateTag(getUserIdTag(userId), "max");
+  updateTag(getUsersGlobalTag());
+  updateTag(getUserIdTag(userId));
 }

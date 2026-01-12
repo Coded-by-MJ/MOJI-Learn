@@ -57,3 +57,4 @@ export type SignUpSchemaType = z.infer<typeof signUpSchema>;
 export type SignInSchemaType = z.infer<typeof signInSchema>;
 export type ResetPasswordSchemaType = z.infer<typeof resetPasswordSchema>;
 export type ForgotPasswordSchemaType = z.infer<typeof forgotPasswordSchema>;
+export type ProfileFormSchemaType = z.infer<typeof profileFormSchema>;

@@ -81,3 +81,7 @@ export function actionToast(actionData?: ActionDataType) {
   if (!actionData) return;
   toast[actionData.error ? "error" : "success"](actionData.message);
 }
+
+export function sumArray<T>(array: T[], func: (item: T) => number) {
+  return array.reduce((acc, item) => acc + func(item), 0)
+}

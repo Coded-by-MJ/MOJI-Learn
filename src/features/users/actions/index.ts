@@ -7,6 +7,12 @@ import { userRoleEnum } from "@/drizzle/schema/auth";
 import { cacheTag } from "next/cache";
 import { getUserIdTag } from "@/features/users/db/cache";
 import type { SessionWithUserType } from "@/types";
+import {
+  profileFormSchema,
+  type ProfileFormSchemaType,
+} from "@/features/auth/zod-schemas";
+import { validateWithZodSchema } from "@/types/global-zod-schemas";
+import { updateUser } from "@/features/users/db";
 
 export const getAuthUserWithRedirect =
   async (): Promise<SessionWithUserType | null> => {
@@ -57,4 +63,31 @@ export const getAdminUser = async () => {
     return user;
   }
   return null;
+};
+
+export const updateUserProfile = async (data: ProfileFormSchemaType) => {
+  const user = await getAuthUserServer();
+  if (!user) {
+    return {
+      error: true,
+      message: "You are not logged in",
+    };
+  }
+  const validatedData = validateWithZodSchema(profileFormSchema, data);
+  if ("error" in validatedData) {
+    return {
+      error: true,
+      message: validatedData.message,
+    };
+  }
+  await updateUser({
+    userId: user.id,
+    data: {
+      name: `${validatedData.firstName} ${validatedData.lastName}`,
+    },
+  });
+  return {
+    error: false,
+    message: "Profile updated successfully",
+  };
 };

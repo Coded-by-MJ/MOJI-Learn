@@ -3,13 +3,11 @@ import {
   pgTable,
   text,
   uuid,
-  primaryKey,
   pgEnum,
   integer,
 } from "drizzle-orm/pg-core";
 import { id, createdAt, updatedAt } from "../schemaHelpers";
-import { CourseTable } from "./course";
-import { courseSectionStatusEnum, CourseSectionTable } from "./courseSection";
+import {  CourseSectionTable } from "./courseSection";
 import { UserLessonCompleteTable } from "./userLessonComplete";
 
 export const lessonStatuses = ["public", "private", "preview"] as const;

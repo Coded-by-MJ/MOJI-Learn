@@ -15,7 +15,8 @@ export async function addUserCourseAccess(
     userId: string
     courseIds: string[]
   },
-  trx: Omit<typeof db, "$client"> = db
+  trx: Omit<typeof db, "$client"> = db,
+  isServer = true
 ) {
   const accesses = await trx
     .insert(UserCourseAccessTable)
@@ -23,7 +24,7 @@ export async function addUserCourseAccess(
     .onConflictDoNothing()
     .returning()
 
-  accesses.forEach(revalidateUserCourseAccessCache)
+  accesses.forEach(access => revalidateUserCourseAccessCache({ userId: access.userId, courseId: access.courseId, isServer }))
 
   return accesses
 }

@@ -38,6 +38,7 @@ const nextConfig: NextConfig = {
         hostname: "ddktnewcdyywxxlpynkm.supabase.co",
         pathname: "/**",
       },
+     
     ],
   },
   typedRoutes: true,

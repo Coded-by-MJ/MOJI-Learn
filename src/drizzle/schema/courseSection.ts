@@ -13,7 +13,6 @@ export const CourseSectionTable = pgTable("course_sections", {
   id,
   courseId: uuid().notNull().references(() => CourseTable.id, { onDelete: "cascade" }),
   name: text().notNull(),
-  description: text().notNull(),
   order: integer().notNull(),
   status: courseSectionStatusEnum().notNull().default("private"),
   createdAt,
