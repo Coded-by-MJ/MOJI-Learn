@@ -41,6 +41,7 @@ export function CourseForm({
       course == null ? createCourse : updateCourse.bind(null, course.id);
     const data = await action(values);
     actionToast(data);
+    form.reset();
   }
 
   return (
