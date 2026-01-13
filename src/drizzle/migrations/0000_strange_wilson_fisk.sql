@@ -1,23 +1,7 @@
-DO $$ BEGIN
- CREATE TYPE "public"."user_role" AS ENUM('admin', 'user');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;--> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."course_section_status" AS ENUM('public', 'private');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;--> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."lesson_status" AS ENUM('public', 'private', 'preview');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;--> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."product_status" AS ENUM('public', 'private');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;--> statement-breakpoint
+CREATE TYPE "public"."user_role" AS ENUM('admin', 'user');--> statement-breakpoint
+CREATE TYPE "public"."course_section_status" AS ENUM('public', 'private');--> statement-breakpoint
+CREATE TYPE "public"."lesson_status" AS ENUM('public', 'private', 'preview');--> statement-breakpoint
+CREATE TYPE "public"."product_status" AS ENUM('public', 'private');--> statement-breakpoint
 CREATE TABLE "accounts" (
 	"id" text PRIMARY KEY NOT NULL,
 	"account_id" text NOT NULL,
@@ -92,7 +76,6 @@ CREATE TABLE "course_sections" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"courseId" uuid NOT NULL,
 	"name" text NOT NULL,
-	"description" text NOT NULL,
 	"order" integer NOT NULL,
 	"status" "course_section_status" DEFAULT 'private' NOT NULL,
 	"createdAt" timestamp with time zone DEFAULT now() NOT NULL,

@@ -8,10 +8,7 @@ export default defineConfig({
   verbose: true,
   dialect: "postgresql",
   dbCredentials: {
-    password: env.DB_PASSWORD,
-    user: env.DB_USER,
-    host: env.DB_HOST,
-    database: env.DB_NAME,
-    ssl: false,
+    url: env.DATABASE_URL,
+ 
   },
 });
