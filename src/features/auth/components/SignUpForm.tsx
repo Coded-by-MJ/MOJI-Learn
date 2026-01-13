@@ -18,14 +18,15 @@ import { signUpSchema, SignUpSchemaType } from "../zod-schemas";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { LogoImage } from "@/components/global/Logo";
-import EmailVerificationSent from "./EmailVerificationSent";
 import { getDefaultImage } from "@/utils/helperFuncs";
 import { env } from "@/data/env/client";
+import { useRouter } from "nextjs-toploader/app";
 
 function SignUpForm({ forceRedirectUrl }: { forceRedirectUrl?: string }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [showVerifyEmail, setShowVerifyEmail] = useState(false);
+
+  const { push } = useRouter();
 
   const { control, handleSubmit, setError } = useForm<SignUpSchemaType>({
     resolver: zodResolver(signUpSchema),
@@ -52,8 +53,8 @@ function SignUpForm({ forceRedirectUrl }: { forceRedirectUrl?: string }) {
           setIsLoading(true);
         },
         onSuccess: async () => {
-          toast.success("Email Verification Link Sent.");
-          setShowVerifyEmail(true);
+          toast.success("Sign up successfully.");
+          push(forceRedirectUrl ?? `${env.NEXT_PUBLIC_APP_URL}/`);
         },
         onError: (ctx) => {
           console.log(ctx);
@@ -75,9 +76,6 @@ function SignUpForm({ forceRedirectUrl }: { forceRedirectUrl?: string }) {
 
     setIsLoading(false);
   };
-
-  if (showVerifyEmail)
-    return <EmailVerificationSent setShowVerifyEmail={setShowVerifyEmail} />;
 
   return (
     <div className="w-full max-w-[500px] flex gap-6 py-10 flex-col">
