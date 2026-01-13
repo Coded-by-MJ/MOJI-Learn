@@ -1,3 +1,4 @@
+import { AsyncBoundary } from "@/components/global/AsyncBoundary";
 import ExpiredLink from "@/features/auth/components/ExpiredLink";
 import ResetPasswordForm from "@/features/auth/components/ResetPasswordForm";
 import type { Metadata } from "next";
@@ -30,8 +31,17 @@ export const metadata: Metadata = {
     images: ["https://www.miracleibharokhonre.com/images/mylogo.png"],
   },
 };
+function ResetPasswordPage(props: PageProps<"/reset-password">) {
+  return (
+    <AsyncBoundary>
+      <ResetPasswordContent {...props} />
+    </AsyncBoundary>
+  );
+}
 
-async function ResetPasswordPage({
+// app/(auth)/reset-password/ResetPasswordContent.tsx
+
+export async function ResetPasswordContent({
   searchParams,
 }: PageProps<"/reset-password">) {
   const { token, error } = await searchParams;
@@ -41,9 +51,10 @@ async function ResetPasswordPage({
       {error || !token ? (
         <ExpiredLink />
       ) : (
-        <ResetPasswordForm token={token.toString()} />
+        <ResetPasswordForm token={String(token)} />
       )}
     </section>
   );
 }
+
 export default ResetPasswordPage;

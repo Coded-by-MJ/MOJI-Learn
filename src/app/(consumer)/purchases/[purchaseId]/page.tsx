@@ -23,21 +23,22 @@ import { notFound, redirect } from "next/navigation";
 import { Fragment, Suspense } from "react";
 import Stripe from "stripe";
 
-export default async function PurchasePage({
-  params,
-}: PageProps<"/purchases/[purchaseId]">) {
-  const { purchaseId } = await params;
-
+export default async function PurchasePage(
+  props: PageProps<"/purchases/[purchaseId]">
+) {
   return (
     <div className="container my-6">
       <Suspense fallback={<LoadingSpinner className="size-36 mx-auto" />}>
-        <SuspenseBoundary purchaseId={purchaseId} />
+        <SuspenseBoundary {...props} />
       </Suspense>
     </div>
   );
 }
 
-async function SuspenseBoundary({ purchaseId }: { purchaseId: string }) {
+async function SuspenseBoundary({
+  params,
+}: PageProps<"/purchases/[purchaseId]">) {
+  const { purchaseId } = await params;
   const user = await getAuthUserServer();
   if (user == null) return redirect("/sign-in");
 

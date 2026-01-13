@@ -1,4 +1,5 @@
 import { ActionButton } from "@/components/global/ActionButton";
+import { AsyncBoundary } from "@/components/global/AsyncBoundary";
 import { SkeletonButton } from "@/components/global/Skeleton";
 import { Button } from "@/components/ui/button";
 import { db } from "@/drizzle/db";
@@ -26,9 +27,19 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ReactNode, Suspense } from "react";
 
-export default async function LessonPage({
+export default async function LessonPage(
+  props: PageProps<"/courses/[courseId]/lessons/[lessonId]">
+) {
+  return (
+    <AsyncBoundary>
+      <LessonPageContent {...props} />
+    </AsyncBoundary>
+  );
+}
+
+async function LessonPageContent({
   params,
-}: PageProps<"/courses/[courseId]/lessons/[lessonId]">) {   
+}: PageProps<"/courses/[courseId]/lessons/[lessonId]">) {
   const { courseId, lessonId } = await params;
   const lesson = await getLesson(lessonId);
 

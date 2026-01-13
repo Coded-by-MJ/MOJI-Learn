@@ -1,3 +1,4 @@
+import { AsyncBoundary } from "@/components/global/AsyncBoundary";
 import { PageHeader } from "@/components/global/PageHeader";
 import { db } from "@/drizzle/db";
 import { CourseTable, ProductTable } from "@/drizzle/schema";
@@ -8,7 +9,17 @@ import { asc, eq } from "drizzle-orm";
 import { cacheTag } from "next/cache";
 import { notFound } from "next/navigation";
 
-export default async function EditProductPage({
+export default function EditProductPage(
+  props: PageProps<"/admin/products/[productId]/edit">
+) {
+  return (
+    <AsyncBoundary>
+      <EditProductPageContent {...props} />
+    </AsyncBoundary>
+  );
+}
+
+async function EditProductPageContent({
   params,
 }: PageProps<"/admin/products/[productId]/edit">) {
   const { productId } = await params;

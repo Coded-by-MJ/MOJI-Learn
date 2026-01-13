@@ -32,11 +32,7 @@ const aj = arcjet({
 });
 
 export async function proxy(request: NextRequest) {
-  const decision = await aj.protect(
-    env.TEST_IP_ADDRESS
-      ? { ...request, ip: env.TEST_IP_ADDRESS, headers: request.headers }
-      : request
-  );
+  const decision = await aj.protect(request);
   if (decision.isDenied()) {
     return new NextResponse(null, { status: 403 });
   }

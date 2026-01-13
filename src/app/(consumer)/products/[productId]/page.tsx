@@ -37,12 +37,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { AsyncBoundary } from "@/components/global/AsyncBoundary";
 
-export default async function ProductPage({
+export default function ProductPage(props: PageProps<"/products/[productId]">) {
+  return (
+    <AsyncBoundary>
+      <ProductPageContent {...props} />
+    </AsyncBoundary>
+  );
+}
+
+async function ProductPageContent({
   params,
 }: PageProps<"/products/[productId]">) {
   const { productId } = await params;
   const product = await getPublicProduct(productId);
+
 
   if (product == null) return notFound();
 

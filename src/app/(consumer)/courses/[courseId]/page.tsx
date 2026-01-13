@@ -1,3 +1,4 @@
+import { AsyncBoundary } from "@/components/global/AsyncBoundary";
 import { PageHeader } from "@/components/global/PageHeader";
 import { db } from "@/drizzle/db";
 import { CourseTable } from "@/drizzle/schema";
@@ -6,10 +7,18 @@ import { eq } from "drizzle-orm";
 import { cacheTag } from "next/cache";
 import { notFound } from "next/navigation";
 
-export default async function CoursePage({
-  params,
-}: PageProps<"/courses/[courseId]">) {
-  const { courseId } = await params;
+export default  function CoursePage(
+  props: PageProps<"/courses/[courseId]">
+) {
+  return (
+    <AsyncBoundary>
+      <CoursePageContent {...props} />
+    </AsyncBoundary>
+  );
+}
+
+async function CoursePageContent(props: PageProps<"/courses/[courseId]">) {
+  const { courseId } = await props.params;
   const course = await getCourse(courseId);
 
   if (course == null) return notFound();

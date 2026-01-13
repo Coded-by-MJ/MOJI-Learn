@@ -1,3 +1,4 @@
+import { AsyncBoundary } from "@/components/global/AsyncBoundary";
 import { Button } from "@/components/ui/button";
 import { db } from "@/drizzle/db";
 import { ProductTable } from "@/drizzle/schema";
@@ -8,7 +9,17 @@ import { cacheTag } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function ProductPurchaseSuccessPage({
+export default async function ProductPurchaseSuccessPage(
+  props: PageProps<"/products/[productId]/purchase/success">
+) {
+  return (
+    <AsyncBoundary>
+      <ProductPurchaseSuccessPageContent {...props} />
+    </AsyncBoundary>
+  );
+}
+
+async function ProductPurchaseSuccessPageContent({
   params,
 }: PageProps<"/products/[productId]/purchase/success">) {
   const { productId } = await params;

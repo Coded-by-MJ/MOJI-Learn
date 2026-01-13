@@ -1,3 +1,4 @@
+import { AsyncBoundary } from "@/components/global/AsyncBoundary";
 import { PageHeader } from "@/components/global/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,7 +20,17 @@ import { EyeClosed, PlusIcon } from "lucide-react";
 import { cacheTag } from "next/cache";
 import { notFound } from "next/navigation";
 
-export default async function EditCoursePage({
+export default function EditCoursePage(
+  props: PageProps<"/admin/courses/[courseId]/edit">
+) {
+  return (
+    <AsyncBoundary>
+      <EditCoursePageContent {...props} />
+    </AsyncBoundary>
+  );
+}
+
+async function EditCoursePageContent({
   params,
 }: PageProps<"/admin/courses/[courseId]/edit">) {
   const { courseId } = await params;
